@@ -46,7 +46,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip --verbose install --editable .[docs,tests]
+          pip --verbose install --editable .[docs,tests] --config-settings editable_mode=strict
       - name: Tests
         run: |
           pytest test/
@@ -63,7 +63,7 @@ jobs:
           echo 'setuptools<80' > constraints_lcov.txt
           export PIP_BUILD_CONSTRAINT=constraints_lcov.txt
           export PIP_CONSTRAINT=constraints_lcov.txt
-          CFLAGS="-coverage" pip --verbose install --force-reinstall --no-deps --editable .[docs,tests]
+          CFLAGS="-coverage" pip --verbose install --force-reinstall --no-deps --editable .[docs,tests] --config-settings editable_mode=strict
           pytest test/
           PYTHONPATH=`pwd`/gmpy2 python test_cython/runtests.py
           mkdir -p build
